@@ -64,11 +64,25 @@ export class ListMultiselectComponent implements OnInit {
     console.log("Clicked!")
   }
 
+  // TOOLBAR ACTIONS
+
   onCleanListSelected(): void {
     // select mode off
     this.selectMode = false;
 
     // clean and emit list selectd
     this.cleanAndEmitListSelected();
+  }
+
+  onShare(): void {
+    console.log('SHARING LIST')
+  }
+
+  onEdit(): void {
+    console.log('EDITING ITEM')
+  }
+
+  onDelete(): void {
+    console.log('DELETING ITEM')
   }
 }

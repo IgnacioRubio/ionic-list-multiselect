@@ -1,0 +1,33 @@
+<ion-header *ngIf="dataListSelected.length > 0">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <!-- close button -->
+      <ion-button (click)="onCleanListSelected()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <!-- number items selected -->
+    <ion-title>{{ dataListSelected.length }}</ion-title>
+
+    <ion-buttons slot="end">
+      <!-- share button -->
+      <ion-button>
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-button>
+      <!-- edit button -->
+      <ion-button>
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+      <!-- delete button -->
+      <ion-button>
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-list>
+  <ion-item *ngFor="let dt of dataList" lines="full" button (click)="onClick(dt)" (press)="onPress(dt)">
+    <ion-label *ngFor="let it of dt | keyvalue">{{ it.value }}</ion-label>
+  </ion-item>
+</ion-list>

@@ -14,6 +14,7 @@ export class ListMultiselectComponent implements OnInit {
   @Output('dataClicked') dataEvent = new EventEmitter<any>();
   @Output('dataListSelected') dataListSelectedEvent = new EventEmitter<any[]>();
   @Output('dataListRemove') removeDataListSelectedEvent = new EventEmitter<any[]>();
+  @Output('dataEdit') editDataEvent = new EventEmitter<any>();
 
   selectMode: boolean = false;
   
@@ -75,7 +76,9 @@ export class ListMultiselectComponent implements OnInit {
   }
 
   onEdit(): void {
-    console.log('EDITING ITEM')
+    const data = this.dataListSelected[0];
+
+    this.editDataEvent.emit(data);
   }
 
   async onDelete(): Promise<void> {

@@ -29,4 +29,8 @@ export class HomePage {
       });
     }
   }
+
+  onDataEdit(event: any): void {
+    console.log(`Edit => ${JSON.stringify(event)}`)
+  }
 }

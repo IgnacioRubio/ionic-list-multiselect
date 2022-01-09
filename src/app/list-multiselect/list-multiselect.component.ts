@@ -1,4 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { AlertController, AlertButton } from '@ionic/angular';
+
+const ALERT_ROLE_CONFIRM: string = 'confirm';
 
 @Component({
   selector: 'app-list-multiselect',
@@ -10,6 +13,7 @@ export class ListMultiselectComponent implements OnInit {
 
   @Output('dataClicked') dataEvent = new EventEmitter<any>();
   @Output('dataListSelected') dataListSelectedEvent = new EventEmitter<any[]>();
+  @Output('dataListRemove') removeDataListSelectedEvent = new EventEmitter<any[]>();
 
   selectMode: boolean = false;
   
@@ -17,8 +21,10 @@ export class ListMultiselectComponent implements OnInit {
   indexListSelected: number[] = [];
 
   isPress: boolean = false; // control press event
-  
-  constructor() { }
+
+  constructor(
+    private alertController: AlertController
+  ) { }
 
   ngOnInit() {}
 
@@ -72,8 +78,15 @@ export class ListMultiselectComponent implements OnInit {
     console.log('EDITING ITEM')
   }
 
-  onDelete(): void {
-    console.log('DELETING ITEM')
+  async onDelete(): Promise<void> {
+    const respond: string = await this.deleteAlert();
+
+    if (respond == ALERT_ROLE_CONFIRM) {
+      // emit select list
+      this.removeDataListSelectedEvent.emit(this.dataListSelected);
+      // clean select list
+      this.cleanAndEmitListSelected();
+    }
   }
 
   // ITEM EVENTS
@@ -99,5 +112,29 @@ export class ListMultiselectComponent implements OnInit {
     }
     
     this.isPress = false;
+  }
+
+  // alert on delete
+  async deleteAlert(): Promise<string> {
+    const confirmAlertButton: AlertButton = {
+      text: 'Sí',
+      role: ALERT_ROLE_CONFIRM
+    };
+
+    const cancelAlertButton: AlertButton = {
+      text: 'No',
+      role: 'cancel'
+    };
+
+    const alert = await this.alertController.create({
+      header: 'Eliminar elementos',
+      message: 'Se van a eliminar los elementos seleccionados.',
+      buttons: [confirmAlertButton, cancelAlertButton]
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    return role;
   }
 }

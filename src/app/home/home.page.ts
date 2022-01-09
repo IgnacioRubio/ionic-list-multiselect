@@ -21,4 +21,12 @@ export class HomePage {
   onDataClicked(event: any): void {
     this.contactsSelected = event;
   }
+
+  onDataListRemove(event: any): void {
+    if (event.length > 0) {
+      this.contacts = this.contacts.filter((contact: Contact) => {
+        return event.indexOf(contact) == -1;
+      });
+    }
+  }
 }

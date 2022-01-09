@@ -3,7 +3,7 @@
     <!-- close -->
     <ion-buttons slot="start">
       <!-- close button -->
-      <ion-button (click)="onCleanListSelected()">
+      <ion-button (click)="onClean()">
         <ion-icon name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -13,13 +13,13 @@
 
     <!-- share + delete + edit -->
     <ion-buttons slot="end">
-      <!-- delete button -->
-      <ion-button *ngIf="dataListSelected.length == 1" (click)="onDelete()">
-        <ion-icon name="trash-outline"></ion-icon>
-      </ion-button>
       <!-- edit button -->
       <ion-button *ngIf="dataListSelected.length == 1" (click)="onEdit()">
         <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button>
+      <!-- delete button -->
+      <ion-button (click)="onDelete()">
+        <ion-icon name="trash-outline"></ion-icon>
       </ion-button>
       <!-- share button -->
       <ion-button (click)="onShare()">
@@ -30,7 +30,7 @@
 </ion-header>
 
 <ion-list>
-  <ion-item *ngFor="let dt of dataList" lines="full" button (click)="onClick(dt)" (press)="onPress(dt)">
+  <ion-item *ngFor="let dt of dataList; let i=index" lines="full" button (click)="onClick(dt, i)" (press)="onPress(dt, i)" color="{{ indexListSelected.indexOf(i) != -1 ? 'dark' : '' }}">
     <ion-label *ngFor="let it of dt | keyvalue">{{ it.value }}</ion-label>
   </ion-item>
 </ion-list>

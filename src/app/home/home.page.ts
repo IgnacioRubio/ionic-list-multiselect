@@ -20,7 +20,5 @@ export class HomePage {
 
   onDataClicked(event: any): void {
     this.contactsSelected = event;
-
-    console.log(`Contracts: ${this.contactsSelected.length}`)
   }
 }

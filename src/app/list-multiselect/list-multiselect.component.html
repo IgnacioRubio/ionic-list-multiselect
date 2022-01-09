@@ -31,6 +31,6 @@
 
 <ion-list>
   <ion-item *ngFor="let dt of dataList; let i=index" lines="full" button (click)="onClick(dt, i)" (press)="onPress(dt, i)" color="{{ indexListSelected.indexOf(i) != -1 ? 'dark' : '' }}">
-    <ion-label *ngFor="let it of dt | keyvalue">{{ it.value }}</ion-label>
+    <ion-label *ngFor="let key of attributesToShow">{{ dt[key] }}</ion-label>
   </ion-item>
 </ion-list>

@@ -10,6 +10,7 @@ const ALERT_ROLE_CONFIRM: string = 'confirm';
 })
 export class ListMultiselectComponent implements OnInit {
   @Input() dataList: any[];
+  @Input() attributesToShow: string[];
 
   @Output('dataClicked') dataEvent = new EventEmitter<any>();
   @Output('dataListSelected') dataListSelectedEvent = new EventEmitter<any[]>();

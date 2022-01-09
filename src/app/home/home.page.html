@@ -8,7 +8,8 @@
 
 <ion-content [fullscreen]="true">
   <app-list-multiselect 
-    [dataList]="contacts" 
+    [dataList]="contacts"
+    [attributesToShow]="contactAttributesToShow"
     (dataClicked)="onClickData($event)" 
     (dataListSelected)="onDataClicked($event)"
     (dataListRemove)="onDataListRemove($event)"

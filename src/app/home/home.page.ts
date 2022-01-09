@@ -11,6 +11,7 @@ import { CONTACTS } from '../mocks/contacts.mock';
 export class HomePage {
   contacts: Contact[] = CONTACTS;
   contactsSelected: Contact[] = [];
+  contactAttributesToShow: string[] = ['name', 'mobile', 'email'];
 
   constructor() {}
 

@@ -33,4 +33,8 @@ export class HomePage {
   onDataEdit(event: any): void {
     console.log(`Edit => ${JSON.stringify(event)}`)
   }
+
+  onDataListShare(event: any): void {
+    console.log(`Share => ${JSON.stringify(event)}`)
+  }
 }

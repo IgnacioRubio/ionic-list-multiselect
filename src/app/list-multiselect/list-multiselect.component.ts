@@ -15,6 +15,7 @@ export class ListMultiselectComponent implements OnInit {
   @Output('dataListSelected') dataListSelectedEvent = new EventEmitter<any[]>();
   @Output('dataListRemove') removeDataListSelectedEvent = new EventEmitter<any[]>();
   @Output('dataEdit') editDataEvent = new EventEmitter<any>();
+  @Output('dataListShare') shareDataListSelectedEvent = new EventEmitter<any[]>();
 
   selectMode: boolean = false;
   
@@ -72,12 +73,13 @@ export class ListMultiselectComponent implements OnInit {
   }
 
   onShare(): void {
-    console.log('SHARING LIST')
+    this.shareDataListSelectedEvent.emit(this.dataListSelected);
   }
 
   onEdit(): void {
+    // get first element, only one should be
     const data = this.dataListSelected[0];
-
+    // emit element selected
     this.editDataEvent.emit(data);
   }
 
